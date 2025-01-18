@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package dashboard;
+
+option go_package = ".;pb";
+
+service DashboardService {
+  rpc GetChartData (ChartDataRequest) returns (ChartDataResponse);
+}
+
+message ChartDataRequest {
+  // Add any request parameters if needed
+}
+
+message ChartDataResponse {
+  repeated ChartData data = 1;
+}
+
+message ChartData {
+  string name = 1;
+  int32 uv = 2;
+  int32 pv = 3;
+}

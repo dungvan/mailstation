@@ -1,0 +1,55 @@
+volumes:
+  pg_data:
+  redis_data:
+networks:
+  ms-dev:
+services:
+  # postgres:
+  #   image: postgres:16
+  #   container_name: postgres
+  #   volumes:
+  #     - pg_data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - ms-dev
+  # redis:
+  #   image: redis:7
+  #   container_name: redis
+  #   volumes:
+  #     - redis_data:/data
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - ms-dev
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: api
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   networks:
+  #     - ms-dev
+  keycloak-idp:
+    image: quay.io/keycloak/keycloak:latest
+    command:
+      - start-dev
+      - --http-port=8080
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    network_mode: host
+    # networks:
+    #   - ms-dev

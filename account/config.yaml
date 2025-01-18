@@ -1,0 +1,11 @@
+idps:
+  idp1:
+    endpoint: http://localhost:8080/realms/IDP
+    client_id: idp1
+    client_secret: c5CH107aKaxJMaJ5WvdW7rlYjV4IaFCd
+    scopes:
+      - openid
+      - email
+      - profile
+    redirect_uri: http://localhost:3000/callback
+    post_logout_redirect_uri: http://localhost:3000/logout

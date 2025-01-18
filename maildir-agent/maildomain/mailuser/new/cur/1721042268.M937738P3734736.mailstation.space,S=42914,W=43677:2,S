@@ -1,0 +1,763 @@
+Return-Path: <dungvan2512@gmail.com>
+Delivered-To: telegram@mailstation.space
+Received: from mailstation.space ([127.0.0.1])
+	by mailstation.space with LMTP
+	id mQiNFlcFlWbQ/DgAB6Sr/Q
+	(envelope-from <dungvan2512@gmail.com>)
+	for <telegram@mailstation.space>; Mon, 15 Jul 2024 18:17:43 +0700
+X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on mailstation.space
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.3 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DMARC_PASS,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_NONE,
+	RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_REMOTE_IMAGE autolearn=ham
+	autolearn_force=no version=3.4.6
+X-Spam-Report: 
+	* -0.1 SPF_PASS SPF check passed
+	* -0.1 DMARC_PASS DMARC check passed
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	*      https://www.dnswl.org/, no trust
+	*      [209.85.208.50 listed in list.dnswl.org]
+	* -0.0 RCVD_IN_MSPIKE_H2 RBL: Average reputation (+2)
+	*      [209.85.208.50 listed in wl.mailspike.net]
+	*  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+	*  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	*      provider
+	*      [dungvan2512[at]gmail.com]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*       valid
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	*      author's domain
+	*  0.0 T_REMOTE_IMAGE Message contains an external image
+X-Spam-Score: -0.3
+Authentication-Results: mailstation.space; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: mailstation.space; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: mailstation.space;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20230601 header.b=KoyMYxDI;
+	dkim-atps=neutral
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mailstation.space (Postfix) with ESMTPS id D4DE77E271
+	for <directupdate@mailstation.space>; Mon, 15 Jul 2024 18:17:42 +0700 (+07)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-59589a9be92so5637650a12.2
+        for <directupdate@mailstation.space>; Mon, 15 Jul 2024 04:17:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1721042258; x=1721647058; darn=mailstation.space;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ZhayIcVOiclzqaf8NT/TZm2sxPLc1MwA0kAYaCSiZWg=;
+        b=KoyMYxDIhvopxKKExN/VmFEJZUAMULYMCmt5Av7Ol3tw98+Fz2a2EefXGJL76cJg/Z
+         LbVDhIUz5dNtseTczdvsNahxxhZyxdCRDN1XCH/5CLuJ1eikL6fZSwY8icL9Hpxx6Vcw
+         bVTmbL//jvEh6f1BFefK/w29ZJ20nqgXu4EpJ+9nZjzMCqd8bnRaenafn2/B8svMbVjj
+         99mSSy1lba/tQCSFxszb6Ij2kTERM8YNIIQ5ObTUxYfOGmCTo5lSP1EKh+sD1jjfUpKd
+         YAjaWOYlAGeYdCcIm2Lx7WvCYnO93cNv39/SzzoF3k032Two52FnXLbQJ5aTMUlfDpE9
+         n2Hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721042258; x=1721647058;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZhayIcVOiclzqaf8NT/TZm2sxPLc1MwA0kAYaCSiZWg=;
+        b=db6fomJ0NXZwGDEkcSzgHQomVnJODL1jV6FazWpd31NydTOWyB0PvCbscWU0a0vE14
+         MXz6hx9aLfEqmMvJSKsUWsPZdh1lu4Mbmqw+r/8mpIx2uaoVT7LqNsARBDxRa6MRO7P6
+         q2zySiqsee1om78J9no6AHfg27KowCmexXqHDybzIh1p5zZ9lceo8IIOyHreLjAQz1jk
+         hxPlOBhhG5taCyrNmf8caiVkBfcNQDts92iV2kBReXl7oZXGA+6/mbk9hRW8UgzfCnnr
+         Xp/lp4z+KyoV+XRigngMVt8bs7Y7aSzvdmnihq7oLCc1PKvKCxMvOG7YsknAwWqUA5Ur
+         8qPg==
+X-Gm-Message-State: AOJu0Yytu8MvLAPQD0WdHEReA659PzKXsJpaD7ZXmaWClfuMimx3WJh9
+	1Xw8pQGHVpsdHJg3pAAUd3X0NEczURuOTNHgPN2jCBx/czDdgqS4AxAingxedf19GdRSq9nQb1W
+	weRI5uYxL1xfE5CIN6Osfv6V350sndA==
+X-Google-Smtp-Source: AGHT+IEaLDPtqeLHkLzYcdp5e3x1zRBybQFoRcBmpRHmtBg17f6GdRJRX3ergUS7R350O462bbzwb5eKmqS1UONEsbk=
+X-Received: by 2002:a17:906:118f:b0:a6c:7181:4ffe with SMTP id
+ a640c23a62f3a-a780b89cae7mr1095718366b.66.1721042257223; Mon, 15 Jul 2024
+ 04:17:37 -0700 (PDT)
+MIME-Version: 1.0
+References: <6694841f978c7_11bb9892978d@sidekiq-54c8b9b4-jx65s.mail>
+In-Reply-To: <6694841f978c7_11bb9892978d@sidekiq-54c8b9b4-jx65s.mail>
+From: Dung Van <dungvan2512@gmail.com>
+Date: Mon, 15 Jul 2024 18:17:00 +0700
+Message-ID: <CAK2WHZ3WyN9ZRTCKjzwOzO1vuSUSZozCv_Ayx85XfyEMreA3jg@mail.gmail.com>
+Subject: Fwd: Top Jobs Matches for Dung Van
+To: directupdate@mailstation.space
+Content-Type: multipart/alternative; boundary="00000000000062a52e061d47604c"
+
+--00000000000062a52e061d47604c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+T=E1=BB=AB: Hubstaff Talent <talent@hubstaff.com>
+Date: Th 2, 15 thg 7, 2024 va=CC=80o lu=CC=81c 09:06
+Subject: Top Jobs Matches for Dung Van
+To: <dungvan2512@gmail.com>
+
+
+<http://track.hubstaff.com/track/click/30149121/talent.hubstaff.com?p=3DeyJ=
+zIjoiN2NWczZMd3pkZDFCdEpldFVHSFRCM2VKZklZIiwidiI6MSwicCI6IntcInVcIjozMDE0OT=
+EyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3RhbGVudC5odWJzdGFmZi5jb21cI=
+ixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wi=
+OltcIjIxOTA2MDZhMzZhMGIwYTk3ZGYxNDQzNTU0Zjc4MzJlMmJkNDQxMWRcIl19In0>
+Suggested jobs
+You may be interested in the following jobs for Dung Van
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiQThjNEJmU1JFNlh3V2wyeE5SSUVteGg0RGdJIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9wcm9maWxlc1xcXC9kdW5nLXZhblwiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4O=
+TQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wiYmE0ZjJmOTZiNjhlYjlkZTE1Zjc5ZjQxNzNiYzNj=
+ODYwMDIwMGQxMFwiXX0ifQ>
+.
+Other jobs
+
+DevOps Engineerfull time
+
+**Company Description** Quick Suite Trading, a division of Computer Voice
+Systems, has been delivering reliable solutions to the finan...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+Ijoibnl1LWkyZmRGV3RIaXlwVll5NzNmSWFfRXdRIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL2Rldm9wcy1lbmdpbmVlci1kM2NiMzRcIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0Z=
+WU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcIjJjYjNjODM1NjA0NjZmOTEwODdl=
+MzNmMDQ3NDNlYWE0NWY4ODQ0ZjdcIl19In0>
+
+Platform Engineerfull time
+
+Remote policy: Full remote Feedzai is the world=E2=80=99s first RiskOps pla=
+tform
+for financial risk management, and the market leader in safe...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoidGZWR3ItUW9peGZudnFwRTJpWndjUTJZLUxVIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL3BsYXRmb3JtLWVuZ2luZWVyLTZcIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3Y=
+TY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcIjJjYjNjODM1NjA0NjZmOTEwODdlMzNm=
+MDQ3NDNlYWE0NWY4ODQ0ZjdcIl19In0>
+
+Lead Software Engineer - Cloud En...full time
+
+Remote policy: Full remote **There are NO limits to your career: come shape
+the future and be part of a truly unique global culture a...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiamVmOUtsM21zN2FXUmd1VEpzaE13aUdGMDZBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL2xlYWQtc29mdHdhcmUtZW5naW5lZXItY2xvdWQtZW5naW5lZXJcIixcImlkXCI6X=
+CIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcIjJjYjNj=
+ODM1NjA0NjZmOTEwODdlMzNmMDQ3NDNlYWE0NWY4ODQ0ZjdcIl19In0>
+
+Blockchain Developerfull time
+
+We are currently looking for a highly motivated and skilled Mid-Level
+Blockchain Ethereum Developer to join our team. The ideal candidate...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiWFNQZmNXOGtiTnNoUFg5eklDMTkzeG12VDVBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL2Jsb2NrY2hhaW4tZGV2ZWxvcGVyLWU3YTkyZVwiLFwiaWRcIjpcIjAzODk4MDQ5Z=
+jM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wiMmNiM2M4MzU2MDQ2NmY5=
+MTA4N2UzM2YwNDc0M2VhYTQ1Zjg4NDRmN1wiXX0ifQ>
+
+We are in need of a Technical Lea...full time
+
+**We are in need of a Technical Lead - Enterprise Applications.**
+**Mongrov** is a leader in customer engagement technology, empowerin...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiZ0c4dlpMOG9PMllnV3E4d1ZyNEJFMHZKbUtNIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL3dlLWFyZS1pbi1uZWVkLW9mLWEtdGVjaG5pY2FsLWxlYWQtZW50ZXJwcmlzZS1hc=
+HBsaWNhdGlvbnMtZG9tYWluXCIsXCJpZFwiOlwiMDM4OTgwNDlmMzYwNGVlN2E2NjdkZTg5NDNj=
+MTllYjFcIixcInVybF9pZHNcIjpbXCIyY2IzYzgzNTYwNDY2ZjkxMDg3ZTMzZjA0NzQzZWFhNDV=
+mODg0NGY3XCJdfSJ9>
+
+Java Developerfull time
+
+Java Developer We are looking for a skilled Java Developer to join our team
+at Classboxes Technologies. The ideal candidate will have ...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoibDVEWG9EMVY3WWl0WU44cnBFUmRpRmFrOHBBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL2phdmEtZGV2ZWxvcGVyLWY2NmVhY1wiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZ=
+TdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wiMmNiM2M4MzU2MDQ2NmY5MTA4N2Uz=
+M2YwNDc0M2VhYTQ1Zjg4NDRmN1wiXX0ifQ>
+
+Senior DevOps Engineerfull time
+
+Remote policy: Global remote **Responsibilities:** - Automate deployments
+and manage **Azure** cloud infrastructure. - Improve ...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiblpMVzNqNmJjV25nZTJqY0FSRGU4U2NzenVBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL3Nlbmlvci1kZXZvcHMtZW5naW5lZXItMWYzOWE0XCIsXCJpZFwiOlwiMDM4OTgwN=
+DlmMzYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcInVybF9pZHNcIjpbXCIyY2IzYzgzNTYwNDY2=
+ZjkxMDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdfSJ9>
+
+WordPress Developerfull time$15/hr
+
+Stop dreaming about tomorrow; start making a difference today. Join our
+team in [https://wpmudev.com/](https://wpmudev.com/) if you are a...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+Ijoic1I3REk5SXBjV2hxSWpFbzQ5eC0yLVE3MVBzIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL3dvcmRwcmVzcy1kZXZlbG9wZXItMGE2NzIzXCIsXCJpZFwiOlwiMDM4OTgwNDlmM=
+zYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcInVybF9pZHNcIjpbXCIyY2IzYzgzNTYwNDY2Zjkx=
+MDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdfSJ9>
+
+Engineering Managerfull time
+
+Remote policy: Global remote **Responsibilities:** - Lead and manage a team
+of 10 (Developers, DevOps, QA). - Perform Scrum Master a...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoibVJGdjZaUVUtMnNWTlREYTc4UzB0elJHSUdZIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL2VuZ2luZWVyaW5nLW1hbmFnZXItMDM0NGJlXCIsXCJpZFwiOlwiMDM4OTgwNDlmM=
+zYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcInVybF9pZHNcIjpbXCIyY2IzYzgzNTYwNDY2Zjkx=
+MDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdfSJ9>
+
+Software Engineerfull time
+
+Remote policy: Full remote **There are NO limits to your career: come shape
+the future and be part of a truly unique global culture a...
+View job
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiSTBfY2hhTklqSFpVcllaWTBGX1daQWlneW1FIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9qb2JzXFxcL3NvZnR3YXJlLWVuZ2luZWVyLTQ2ZDIyZFwiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2M=
+DRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wiMmNiM2M4MzU2MDQ2NmY5MTA4=
+N2UzM2YwNDc0M2VhYTQ1Zjg4NDRmN1wiXX0ifQ>
+Want to see more jobs?
+Search jobs
+<https://hubstafftalent.net/search/jobs?search%5Bjob_type%5D%5B0%5D=3D1&sea=
+rch%5Bjob_type%5D%5B1%5D=3D1&search%5Bjob_type%5D%5B2%5D=3D1&search%5Bskill=
+_ids%5D%5B%5D=3D329&search%5Bskill_ids%5D%5B%5D=3D231&search%5Bskill_ids%5D=
+%5B%5D=3D111&search%5Bskill_ids%5D%5B%5D=3D1441&search%5Bskill_ids%5D%5B%5D=
+=3D81&search%5Bskill_ids%5D%5B%5D=3D124&search%5Bskill_ids%5D%5B%5D=3D299&s=
+earch%5Bskill_ids%5D%5B%5D=3D3698&search%5Bskill_ids%5D%5B%5D=3D61507&searc=
+h%5Bskill_ids%5D%5B%5D=3D81856>
+
+Time tracking, screenshots and reporting
+Learn more
+<http://track.hubstaff.com/track/click/30149121/hubstaff.com?p=3DeyJzIjoiak=
+51QjNVZTFzcW0zSmV0bDFTWHVlYjVhTUhVIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcI=
+nZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmLmNvbVxcXC8_dXRtX3NvdXJj=
+ZT1lbWFpbCZ1dG1fbWVkaXVtPXRhbGVudF9lbWFpbHMmdXRtX2NhbXBhaWduPXRhbGVudC1yZXR=
+yZWF0LTIwMjBcIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLF=
+widXJsX2lkc1wiOltcImYzNjFiMzlmYTQwMTMwN2YxODg1NjdjOWMwOTgyYzM3ZTdmNTc5YzFcI=
+l19In0>
+Agile, visual project management
+Learn more
+<http://track.hubstaff.com/track/click/30149121/hubstaff.com?p=3DeyJzIjoiTj=
+FvTlc4MWZ2bFFlTE5icVJjTTBxQV84TklVIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcI=
+nZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmLmNvbVxcXC90YXNrcz91dG1f=
+c291cmNlPWVtYWlsJnV0bV9tZWRpdW09dGFsZW50X2VtYWlscyZ1dG1fY2FtcGFpZ249dGFsZW5=
+0LXJldHJlYXQtMjAyMFwiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZW=
+IxXCIsXCJ1cmxfaWRzXCI6W1wiMWFmMWY2N2FhNWQ2OWE0ZjcyMTVlMWIwYjk3ODE0NjdhNWI2N=
+DUwZFwiXX0ifQ>
+Find remote talent across the world
+Learn more
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiRV9Sa3ZFamZpcWtrVUFuMjRUQlhNcUswUmx3IiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+8_dXRtX3NvdXJjZT1lbWFpbCZ1dG1fbWVkaXVtPXRhbGVudF9lbWFpbHMmdXRtX2NhbXBhaWduP=
+XRhbGVudC1yZXRyZWF0LTIwMjBcIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0=
+M2MxOWViMVwiLFwidXJsX2lkc1wiOltcImRjYzM3MzhhMTYzMzEzODQ1YjA3YmY3YjNjNjA5NDF=
+hZjRmNWZkN2FcIl19In0>
+Netsoft Holdings, LLC - 11650 Olio Rd. Suite #1000 - 193 Fishers, IN 46037,
+United States
+Our Blog
+<http://track.hubstaff.com/track/click/30149121/blog.hubstaff.com?p=3DeyJzI=
+joidnFMZGhWS0xGWGtwQmpsTGU0M3Zsa3E2YWRBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEy=
+MSxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvYmxvZy5odWJzdGFmZi5jb21cIixcIml=
+kXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcIj=
+U2MGM5NzIyMTI1MjUxMzAwMDJkYzg5N2ZjYmQyZGM5OTU4M2NmZTJcIl19In0>
+| Support
+<http://track.hubstaff.com/track/click/30149121/support.hubstaff.com?p=3Dey=
+JzIjoiMGF1bjlXZVJGeUZQSGZKb0dZd0RyT2FqWE1rIiwidiI6MSwicCI6IntcInVcIjozMDE0O=
+TEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvc3VwcG9ydC5odWJzdGFmZi5jb21c=
+IixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1w=
+iOltcImRjNjAxNzJhOWJkZGE1NTI4NWFlNTU2ZWY1OWIxNDZiYzE3NTFkNGJcIl19In0>
+Change notification settings
+<http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJz=
+IjoiM085a1Q0cGwwTElINEVYeE1NWUMwcVIzM3lBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTE=
+yMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC=
+9zZXR0aW5nc1wiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsX=
+CJ1cmxfaWRzXCI6W1wiMGNkNjM3NzM3YWY0ZmQ4MWVjYmQ4NDBhYmE4YjAxZGViMWI4YmY2OVwi=
+XX0ifQ>
+
+--00000000000062a52e061d47604c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>T=E1=BB=AB: <stro=
+ng class=3D"gmail_sendername" dir=3D"auto">Hubstaff Talent</strong> <span d=
+ir=3D"auto">&lt;<a href=3D"mailto:talent@hubstaff.com">talent@hubstaff.com<=
+/a>&gt;</span><br>Date: Th 2, 15 thg 7, 2024 va=CC=80o lu=CC=81c 09:06<br>S=
+ubject: Top Jobs Matches for Dung Van<br>To:  &lt;<a href=3D"mailto:dungvan=
+2512@gmail.com">dungvan2512@gmail.com</a>&gt;<br></div><br><br><div class=
+=3D"msg-2675869003916603071"><u></u>
+
+ =20
+   =20
+   =20
+
+   =20
+   =20
+
+   =20
+
+   =20
+ =20
+  <div marginwidth=3D"0" marginheight=3D"0">
+  <table border=3D"0" width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" bg=
+color=3D"ffffff">
+   =20
+    <tbody><tr>
+      <td width=3D"100%" align=3D"center" height=3D"60" bgcolor=3D"ffffff">
+        <table border=3D"0" width=3D"580" align=3D"center" cellpadding=3D"0=
+" cellspacing=3D"0" class=3D"m_-2675869003916603071container560">
+          <tbody><tr>
+            <td align=3D"left">
+              <a href=3D"http://track.hubstaff.com/track/click/30149121/tal=
+ent.hubstaff.com?p=3DeyJzIjoiN2NWczZMd3pkZDFCdEpldFVHSFRCM2VKZklZIiwidiI6MS=
+wicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3Rhb=
+GVudC5odWJzdGFmZi5jb21cIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2Mx=
+OWViMVwiLFwidXJsX2lkc1wiOltcIjIxOTA2MDZhMzZhMGIwYTk3ZGYxNDQzNTU0Zjc4MzJlMmJ=
+kNDQxMWRcIl19In0" style=3D"display:block;border-style:none!important;border=
+:0!important" target=3D"_blank"><img border=3D"0" style=3D"display:block" s=
+rc=3D"https://talent-assets.hubstaff.com/a6bb8f57/mailer/logo-aa81eac6e0370=
+d2c442700c2e97726e2d514ad3087abf3b6e082f99810664df4.png" height=3D"25"></a>
+            </td>
+            <td align=3D"right">
+             =20
+            </td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+   =20
+
+   =20
+    <tr>
+      <td width=3D"100%" align=3D"center">
+
+        <table border=3D"0" align=3D"center" width=3D"600" cellpadding=3D"0=
+" cellspacing=3D"0" bgcolor=3D"ffffff" class=3D"m_-2675869003916603071conta=
+iner600">
+          <tbody><tr><td height=3D"30"></td></tr>
+          <tr>
+            <td align=3D"center">
+
+              <table border=3D"0" align=3D"center" width=3D"580" cellpaddin=
+g=3D"0" cellspacing=3D"0" class=3D"m_-2675869003916603071container580">
+                <tbody><tr>
+                  <td align=3D"center">
+
+                    <table border=3D"0" align=3D"center" width=3D"578" cell=
+padding=3D"0" cellspacing=3D"0" bgcolor=3D"FFFFFF" class=3D"m_-267586900391=
+6603071main-content" style=3D"border-radius:4px;border:1px solid #d6d9dd;pa=
+dding-top:20px;padding-bottom:20px">
+
+                     =20
+                      <tbody><tr>
+                        <td align=3D"center">
+                          <table align=3D"center" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" class=3D"m_-2675869003916603071container540" width=
+=3D"540"><tbody><tr><td><h1 align=3D"center" style=3D"margin:0px;padding:0p=
+x;font-weight:400;color:#3c495a">Suggested jobs</h1></td></tr><tr><td heigh=
+t=3D"7"></td></tr><tr><td align=3D"center" class=3D"m_-2675869003916603071s=
+ection-title" style=3D"font-size:15px;line-height:24px;color:#617083;font-w=
+eight:400">You may be interested in the following jobs for <a style=3D"colo=
+r:#2aa7ff;border-style:none!important;border:0!important;text-decoration:no=
+ne!important" href=3D"http://track.hubstaff.com/track/click/30149121/hubsta=
+fftalent.net?p=3DeyJzIjoiQThjNEJmU1JFNlh3V2wyeE5SSUVteGg0RGdJIiwidiI6MSwicC=
+I6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0Y=
+WZmdGFsZW50Lm5ldFxcXC9wcm9maWxlc1xcXC9kdW5nLXZhblwiLFwiaWRcIjpcIjAzODk4MDQ5=
+ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wiYmE0ZjJmOTZiNjhlYjl=
+kZTE1Zjc5ZjQxNzNiYzNjODYwMDIwMGQxMFwiXX0ifQ" target=3D"_blank">Dung Van</a>=
+.</td></tr><tr><td height=3D"7"></td></tr><tr><td align=3D"center" class=3D=
+"m_-2675869003916603071section-title" style=3D"color:#617083"></td></tr><tr=
+><td style=3D"color:#5d6775;font-size:20px;text-align:left;padding-bottom:1=
+0px;padding-top:25px">Other jobs</td></tr><tr><td><table><tbody><tr><td sty=
+le=3D"border-bottom:1px solid #e2e9f0;padding-top:17px;text-align:left"><di=
+v><h4 style=3D"color:#3c495a;font-size:16px;font-weight:500;margin:0 0 10px=
+ 0;display:inline">DevOps Engineer</h4><span style=3D"font-size:12px;color:=
+#fff;background-color:#55a8fd;border-radius:15px;padding:3px 5px;margin:0 1=
+0px;display:inline;white-space:nowrap">full time</span></div><p style=3D"co=
+lor:#7f92a9;font-size:13px;line-height:18px">**Company Description**
+
+Quick Suite Trading, a division of Computer Voice Systems, has been deliver=
+ing reliable solutions to the finan...</p></td><td style=3D"border-bottom:1=
+px solid #e2e9f0"><a href=3D"http://track.hubstaff.com/track/click/30149121=
+/hubstafftalent.net?p=3DeyJzIjoibnl1LWkyZmRGV3RIaXlwVll5NzNmSWFfRXdRIiwidiI=
+6MSwicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2=
+h1YnN0YWZmdGFsZW50Lm5ldFxcXC9qb2JzXFxcL2Rldm9wcy1lbmdpbmVlci1kM2NiMzRcIixcI=
+mlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltc=
+IjJjYjNjODM1NjA0NjZmOTEwODdlMzNmMDQ3NDNlYWE0NWY4ODQ0ZjdcIl19In0" style=3D"f=
+ont-size:13px;color:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;=
+;font-weight:bold;text-decoration:none;border-radius:3px;background-color:#=
+419efb;display:block;white-space:nowrap;padding:6px 13px" target=3D"_blank"=
+>View job</a></td></tr><tr><td style=3D"border-bottom:1px solid #e2e9f0;pad=
+ding-top:17px;text-align:left"><div><h4 style=3D"color:#3c495a;font-size:16=
+px;font-weight:500;margin:0 0 10px 0;display:inline">Platform Engineer</h4>=
+<span style=3D"font-size:12px;color:#fff;background-color:#55a8fd;border-ra=
+dius:15px;padding:3px 5px;margin:0 10px;display:inline;white-space:nowrap">=
+full time</span></div><p style=3D"color:#7f92a9;font-size:13px;line-height:=
+18px"> =20
+Remote policy: Full remote
+
+Feedzai is the world=E2=80=99s first RiskOps platform for financial risk ma=
+nagement, and the market leader in safe...</p></td><td style=3D"border-bott=
+om:1px solid #e2e9f0"><a href=3D"http://track.hubstaff.com/track/click/3014=
+9121/hubstafftalent.net?p=3DeyJzIjoidGZWR3ItUW9peGZudnFwRTJpWndjUTJZLUxVIiw=
+idiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXF=
+xcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC9qb2JzXFxcL3BsYXRmb3JtLWVuZ2luZWVyLTZcIixcI=
+mlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltc=
+IjJjYjNjODM1NjA0NjZmOTEwODdlMzNmMDQ3NDNlYWE0NWY4ODQ0ZjdcIl19In0" style=3D"f=
+ont-size:13px;color:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;=
+;font-weight:bold;text-decoration:none;border-radius:3px;background-color:#=
+419efb;display:block;white-space:nowrap;padding:6px 13px" target=3D"_blank"=
+>View job</a></td></tr><tr><td style=3D"border-bottom:1px solid #e2e9f0;pad=
+ding-top:17px;text-align:left"><div><h4 style=3D"color:#3c495a;font-size:16=
+px;font-weight:500;margin:0 0 10px 0;display:inline">Lead Software Engineer=
+ - Cloud En...</h4><span style=3D"font-size:12px;color:#fff;background-colo=
+r:#55a8fd;border-radius:15px;padding:3px 5px;margin:0 10px;display:inline;w=
+hite-space:nowrap">full time</span></div><p style=3D"color:#7f92a9;font-siz=
+e:13px;line-height:18px"> =20
+Remote policy: Full remote
+
+**There are NO limits to your career: come shape the future and be part of =
+a truly unique global culture a...</p></td><td style=3D"border-bottom:1px s=
+olid #e2e9f0"><a href=3D"http://track.hubstaff.com/track/click/30149121/hub=
+stafftalent.net?p=3DeyJzIjoiamVmOUtsM21zN2FXUmd1VEpzaE13aUdGMDZBIiwidiI6MSw=
+icCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1Yn=
+N0YWZmdGFsZW50Lm5ldFxcXC9qb2JzXFxcL2xlYWQtc29mdHdhcmUtZW5naW5lZXItY2xvdWQtZ=
+W5naW5lZXJcIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwi=
+dXJsX2lkc1wiOltcIjJjYjNjODM1NjA0NjZmOTEwODdlMzNmMDQ3NDNlYWE0NWY4ODQ0ZjdcIl1=
+9In0" style=3D"font-size:13px;color:#ffffff;text-align:center;font-family:&=
+#39;PT Sans&#39;;font-weight:bold;text-decoration:none;border-radius:3px;ba=
+ckground-color:#419efb;display:block;white-space:nowrap;padding:6px 13px" t=
+arget=3D"_blank">View job</a></td></tr><tr><td style=3D"border-bottom:1px s=
+olid #e2e9f0;padding-top:17px;text-align:left"><div><h4 style=3D"color:#3c4=
+95a;font-size:16px;font-weight:500;margin:0 0 10px 0;display:inline">Blockc=
+hain Developer</h4><span style=3D"font-size:12px;color:#fff;background-colo=
+r:#55a8fd;border-radius:15px;padding:3px 5px;margin:0 10px;display:inline;w=
+hite-space:nowrap">full time</span></div><p style=3D"color:#7f92a9;font-siz=
+e:13px;line-height:18px">We are currently looking for a highly motivated an=
+d skilled Mid-Level Blockchain Ethereum Developer to join our team. The ide=
+al candidate...</p></td><td style=3D"border-bottom:1px solid #e2e9f0"><a hr=
+ef=3D"http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=
+=3DeyJzIjoiWFNQZmNXOGtiTnNoUFg5eklDMTkzeG12VDVBIiwidiI6MSwicCI6IntcInVcIjoz=
+MDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5=
+ldFxcXC9qb2JzXFxcL2Jsb2NrY2hhaW4tZGV2ZWxvcGVyLWU3YTkyZVwiLFwiaWRcIjpcIjAzOD=
+k4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wiMmNiM2M4MzU2M=
+DQ2NmY5MTA4N2UzM2YwNDc0M2VhYTQ1Zjg4NDRmN1wiXX0ifQ" style=3D"font-size:13px;=
+color:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;;font-weight:b=
+old;text-decoration:none;border-radius:3px;background-color:#419efb;display=
+:block;white-space:nowrap;padding:6px 13px" target=3D"_blank">View job</a><=
+/td></tr><tr><td style=3D"border-bottom:1px solid #e2e9f0;padding-top:17px;=
+text-align:left"><div><h4 style=3D"color:#3c495a;font-size:16px;font-weight=
+:500;margin:0 0 10px 0;display:inline">We are in need of a Technical Lea...=
+</h4><span style=3D"font-size:12px;color:#fff;background-color:#55a8fd;bord=
+er-radius:15px;padding:3px 5px;margin:0 10px;display:inline;white-space:now=
+rap">full time</span></div><p style=3D"color:#7f92a9;font-size:13px;line-he=
+ight:18px">**We are in need of a Technical Lead - Enterprise Applications.*=
+*
+
+**Mongrov** is a leader in customer engagement technology, empowerin...</p>=
+</td><td style=3D"border-bottom:1px solid #e2e9f0"><a href=3D"http://track.=
+hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJzIjoiZ0c4dlpMOG=
+9PMllnV3E4d1ZyNEJFMHZKbUtNIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxL=
+FwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC9qb2JzXFxcL3dl=
+LWFyZS1pbi1uZWVkLW9mLWEtdGVjaG5pY2FsLWxlYWQtZW50ZXJwcmlzZS1hcHBsaWNhdGlvbnM=
+tZG9tYWluXCIsXCJpZFwiOlwiMDM4OTgwNDlmMzYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcIn=
+VybF9pZHNcIjpbXCIyY2IzYzgzNTYwNDY2ZjkxMDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdf=
+SJ9" style=3D"font-size:13px;color:#ffffff;text-align:center;font-family:&#=
+39;PT Sans&#39;;font-weight:bold;text-decoration:none;border-radius:3px;bac=
+kground-color:#419efb;display:block;white-space:nowrap;padding:6px 13px" ta=
+rget=3D"_blank">View job</a></td></tr><tr><td style=3D"border-bottom:1px so=
+lid #e2e9f0;padding-top:17px;text-align:left"><div><h4 style=3D"color:#3c49=
+5a;font-size:16px;font-weight:500;margin:0 0 10px 0;display:inline">Java De=
+veloper</h4><span style=3D"font-size:12px;color:#fff;background-color:#55a8=
+fd;border-radius:15px;padding:3px 5px;margin:0 10px;display:inline;white-sp=
+ace:nowrap">full time</span></div><p style=3D"color:#7f92a9;font-size:13px;=
+line-height:18px">Java Developer
+
+We are looking for a skilled Java Developer to join our team at Classboxes =
+Technologies. The ideal candidate will have ...</p></td><td style=3D"border=
+-bottom:1px solid #e2e9f0"><a href=3D"http://track.hubstaff.com/track/click=
+/30149121/hubstafftalent.net?p=3DeyJzIjoibDVEWG9EMVY3WWl0WU44cnBFUmRpRmFrOH=
+BBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcX=
+FwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC9qb2JzXFxcL2phdmEtZGV2ZWxvcGVyLWY2NmVh=
+Y1wiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWR=
+zXCI6W1wiMmNiM2M4MzU2MDQ2NmY5MTA4N2UzM2YwNDc0M2VhYTQ1Zjg4NDRmN1wiXX0ifQ" st=
+yle=3D"font-size:13px;color:#ffffff;text-align:center;font-family:&#39;PT S=
+ans&#39;;font-weight:bold;text-decoration:none;border-radius:3px;background=
+-color:#419efb;display:block;white-space:nowrap;padding:6px 13px" target=3D=
+"_blank">View job</a></td></tr><tr><td style=3D"border-bottom:1px solid #e2=
+e9f0;padding-top:17px;text-align:left"><div><h4 style=3D"color:#3c495a;font=
+-size:16px;font-weight:500;margin:0 0 10px 0;display:inline">Senior DevOps =
+Engineer</h4><span style=3D"font-size:12px;color:#fff;background-color:#55a=
+8fd;border-radius:15px;padding:3px 5px;margin:0 10px;display:inline;white-s=
+pace:nowrap">full time</span></div><p style=3D"color:#7f92a9;font-size:13px=
+;line-height:18px"> =20
+Remote policy: Global remote
+
+**Responsibilities:** =20
+ =20
+
+- Automate deployments and manage **Azure** cloud infrastructure.
+- Improve ...</p></td><td style=3D"border-bottom:1px solid #e2e9f0"><a href=
+=3D"http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3De=
+yJzIjoiblpMVzNqNmJjV25nZTJqY0FSRGU4U2NzenVBIiwidiI6MSwicCI6IntcInVcIjozMDE0=
+OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFx=
+cXC9qb2JzXFxcL3Nlbmlvci1kZXZvcHMtZW5naW5lZXItMWYzOWE0XCIsXCJpZFwiOlwiMDM4OT=
+gwNDlmMzYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcInVybF9pZHNcIjpbXCIyY2IzYzgzNTYwN=
+DY2ZjkxMDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdfSJ9" style=3D"font-size:13px;co=
+lor:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;;font-weight:bol=
+d;text-decoration:none;border-radius:3px;background-color:#419efb;display:b=
+lock;white-space:nowrap;padding:6px 13px" target=3D"_blank">View job</a></t=
+d></tr><tr><td style=3D"border-bottom:1px solid #e2e9f0;padding-top:17px;te=
+xt-align:left"><div><h4 style=3D"color:#3c495a;font-size:16px;font-weight:5=
+00;margin:0 0 10px 0;display:inline">WordPress Developer</h4><span style=3D=
+"font-size:12px;color:#fff;background-color:#55a8fd;border-radius:15px;padd=
+ing:3px 5px;margin:0 10px;display:inline;white-space:nowrap">full time</spa=
+n><span>$15/hr</span></div><p style=3D"color:#7f92a9;font-size:13px;line-he=
+ight:18px">Stop dreaming about tomorrow; start making a difference today. J=
+oin our team in=C2=A0[<a href=3D"https://wpmudev.com/%5D(https://wpmudev.co=
+m/)" target=3D"_blank">https://wpmudev.com/](https://wpmudev.com/)</a>=C2=
+=A0if you are a...</p></td><td style=3D"border-bottom:1px solid #e2e9f0"><a=
+ href=3D"http://track.hubstaff.com/track/click/30149121/hubstafftalent.net?=
+p=3DeyJzIjoic1I3REk5SXBjV2hxSWpFbzQ5eC0yLVE3MVBzIiwidiI6MSwicCI6IntcInVcIjo=
+zMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm=
+5ldFxcXC9qb2JzXFxcL3dvcmRwcmVzcy1kZXZlbG9wZXItMGE2NzIzXCIsXCJpZFwiOlwiMDM4O=
+TgwNDlmMzYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcInVybF9pZHNcIjpbXCIyY2IzYzgzNTYw=
+NDY2ZjkxMDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdfSJ9" style=3D"font-size:13px;c=
+olor:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;;font-weight:bo=
+ld;text-decoration:none;border-radius:3px;background-color:#419efb;display:=
+block;white-space:nowrap;padding:6px 13px" target=3D"_blank">View job</a></=
+td></tr><tr><td style=3D"border-bottom:1px solid #e2e9f0;padding-top:17px;t=
+ext-align:left"><div><h4 style=3D"color:#3c495a;font-size:16px;font-weight:=
+500;margin:0 0 10px 0;display:inline">Engineering Manager</h4><span style=
+=3D"font-size:12px;color:#fff;background-color:#55a8fd;border-radius:15px;p=
+adding:3px 5px;margin:0 10px;display:inline;white-space:nowrap">full time</=
+span></div><p style=3D"color:#7f92a9;font-size:13px;line-height:18px"> =20
+Remote policy: Global remote
+
+**Responsibilities:**
+
+- Lead and manage a team of 10 (Developers, DevOps, QA).
+- Perform Scrum Master a...</p></td><td style=3D"border-bottom:1px solid #e=
+2e9f0"><a href=3D"http://track.hubstaff.com/track/click/30149121/hubstaffta=
+lent.net?p=3DeyJzIjoibVJGdjZaUVUtMnNWTlREYTc4UzB0elJHSUdZIiwidiI6MSwicCI6In=
+tcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmd=
+GFsZW50Lm5ldFxcXC9qb2JzXFxcL2VuZ2luZWVyaW5nLW1hbmFnZXItMDM0NGJlXCIsXCJpZFwi=
+OlwiMDM4OTgwNDlmMzYwNGVlN2E2NjdkZTg5NDNjMTllYjFcIixcInVybF9pZHNcIjpbXCIyY2I=
+zYzgzNTYwNDY2ZjkxMDg3ZTMzZjA0NzQzZWFhNDVmODg0NGY3XCJdfSJ9" style=3D"font-si=
+ze:13px;color:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;;font-=
+weight:bold;text-decoration:none;border-radius:3px;background-color:#419efb=
+;display:block;white-space:nowrap;padding:6px 13px" target=3D"_blank">View =
+job</a></td></tr><tr><td style=3D"border-bottom:1px solid #e2e9f0;padding-t=
+op:17px;text-align:left"><div><h4 style=3D"color:#3c495a;font-size:16px;fon=
+t-weight:500;margin:0 0 10px 0;display:inline">Software Engineer</h4><span =
+style=3D"font-size:12px;color:#fff;background-color:#55a8fd;border-radius:1=
+5px;padding:3px 5px;margin:0 10px;display:inline;white-space:nowrap">full t=
+ime</span></div><p style=3D"color:#7f92a9;font-size:13px;line-height:18px">=
+ =20
+Remote policy: Full remote
+
+**There are NO limits to your career: come shape the future and be part of =
+a truly unique global culture a...</p></td><td style=3D"border-bottom:1px s=
+olid #e2e9f0"><a href=3D"http://track.hubstaff.com/track/click/30149121/hub=
+stafftalent.net?p=3DeyJzIjoiSTBfY2hhTklqSFpVcllaWTBGX1daQWlneW1FIiwidiI6MSw=
+icCI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1Yn=
+N0YWZmdGFsZW50Lm5ldFxcXC9qb2JzXFxcL3NvZnR3YXJlLWVuZ2luZWVyLTQ2ZDIyZFwiLFwia=
+WRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzXCI6W1wi=
+MmNiM2M4MzU2MDQ2NmY5MTA4N2UzM2YwNDc0M2VhYTQ1Zjg4NDRmN1wiXX0ifQ" style=3D"fo=
+nt-size:13px;color:#ffffff;text-align:center;font-family:&#39;PT Sans&#39;;=
+font-weight:bold;text-decoration:none;border-radius:3px;background-color:#4=
+19efb;display:block;white-space:nowrap;padding:6px 13px" target=3D"_blank">=
+View job</a></td></tr></tbody></table></td></tr><tr><td height=3D"15"></td>=
+</tr><tr><td height=3D"7"></td></tr><tr><td align=3D"center" class=3D"m_-26=
+75869003916603071section-title" style=3D"font-size:15px;line-height:24px;co=
+lor:#617083;font-weight:400">Want to see more jobs?</td></tr><tr><td height=
+=3D"7"></td></tr><tr><td align=3D"left" class=3D"m_-2675869003916603071sect=
+ion-title" style=3D"color:#617083"><table align=3D"left" border=3D"0" cellp=
+adding=3D"5" cellspacing=3D"0" class=3D"m_-2675869003916603071section-item"=
+ width=3D"540"><tbody><tr><td align=3D"center" style=3D"padding:0"><a href=
+=3D"https://hubstafftalent.net/search/jobs?search%5Bjob_type%5D%5B0%5D=3D1&=
+amp;search%5Bjob_type%5D%5B1%5D=3D1&amp;search%5Bjob_type%5D%5B2%5D=3D1&amp=
+;search%5Bskill_ids%5D%5B%5D=3D329&amp;search%5Bskill_ids%5D%5B%5D=3D231&am=
+p;search%5Bskill_ids%5D%5B%5D=3D111&amp;search%5Bskill_ids%5D%5B%5D=3D1441&=
+amp;search%5Bskill_ids%5D%5B%5D=3D81&amp;search%5Bskill_ids%5D%5B%5D=3D124&=
+amp;search%5Bskill_ids%5D%5B%5D=3D299&amp;search%5Bskill_ids%5D%5B%5D=3D369=
+8&amp;search%5Bskill_ids%5D%5B%5D=3D61507&amp;search%5Bskill_ids%5D%5B%5D=
+=3D81856" style=3D"font-size:15px;color:#2aa7ff;text-align:center;font-weig=
+ht:600;text-decoration:none;border-radius:3px;border:1px solid #2aa7ff;disp=
+lay:inline-block;padding:8px 12px" target=3D"_blank">Search jobs</a></td></=
+tr><tr><td height=3D"15"></td></tr></tbody></table></td></tr><tr><td height=
+=3D"15"></td></tr><tr><td><table align=3D"center" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" class=3D"m_-2675869003916603071container540" width=
+=3D"540"><tbody><tr><td height=3D"25"></td></tr><tr><td bgcolor=3D"E1E8F0" =
+height=3D"1"></td></tr><tr><td height=3D"20"></td></tr></tbody></table><tab=
+le border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"m_-26758690039=
+16603071section-item" width=3D"540"><tbody><tr><td style=3D"padding-right:1=
+0px" width=3D"180"><img height=3D"20" src=3D"https://talent-assets.hubstaff=
+.com/a6bb8f57/mailer/logo-hubstaff-28c5de2c47568132b18767c7cc317f63cc0949ab=
+05adc1ece252fac40a559c85.png"><div style=3D"font-size:13px;margin-top:20px"=
+>Time tracking, screenshots and reporting</div><div style=3D"font-size:13px=
+;margin-top:10px"><a href=3D"http://track.hubstaff.com/track/click/30149121=
+/hubstaff.com?p=3DeyJzIjoiak51QjNVZTFzcW0zSmV0bDFTWHVlYjVhTUhVIiwidiI6MSwic=
+CI6IntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0=
+YWZmLmNvbVxcXC8_dXRtX3NvdXJjZT1lbWFpbCZ1dG1fbWVkaXVtPXRhbGVudF9lbWFpbHMmdXR=
+tX2NhbXBhaWduPXRhbGVudC1yZXRyZWF0LTIwMjBcIixcImlkXCI6XCIwMzg5ODA0OWYzNjA0ZW=
+U3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcImYzNjFiMzlmYTQwMTMwN2YxODg1N=
+jdjOWMwOTgyYzM3ZTdmNTc5YzFcIl19In0" target=3D"_blank">Learn more</a></div><=
+/td><td style=3D"padding-left:10px;padding-right:10px" width=3D"180"><img h=
+eight=3D"20" src=3D"https://talent-assets.hubstaff.com/a6bb8f57/mailer/logo=
+-tasks-0951e1c8d8c87a53dce05c17b0a68f17f3d8ef65c09294448e67c4bcdf439dd0.png=
+"><div style=3D"font-size:13px;margin-top:20px"> Agile, visual project mana=
+gement</div><div style=3D"font-size:13px;margin-top:10px"><a href=3D"http:/=
+/track.hubstaff.com/track/click/30149121/hubstaff.com?p=3DeyJzIjoiTjFvTlc4M=
+WZ2bFFlTE5icVJjTTBxQV84TklVIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjox=
+LFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmLmNvbVxcXC90YXNrcz91dG1fc291cmN=
+lPWVtYWlsJnV0bV9tZWRpdW09dGFsZW50X2VtYWlscyZ1dG1fY2FtcGFpZ249dGFsZW50LXJldH=
+JlYXQtMjAyMFwiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsX=
+CJ1cmxfaWRzXCI6W1wiMWFmMWY2N2FhNWQ2OWE0ZjcyMTVlMWIwYjk3ODE0NjdhNWI2NDUwZFwi=
+XX0ifQ" target=3D"_blank">Learn more</a></div></td><td style=3D"padding-lef=
+t:20px" width=3D"180"><img height=3D"20" src=3D"https://talent-assets.hubst=
+aff.com/a6bb8f57/mailer/logo-aa81eac6e0370d2c442700c2e97726e2d514ad3087abf3=
+b6e082f99810664df4.png"><div style=3D"font-size:13px;margin-top:20px"> Find=
+ remote talent across the world</div><div style=3D"font-size:13px;margin-to=
+p:10px"><a href=3D"http://track.hubstaff.com/track/click/30149121/hubstafft=
+alent.net?p=3DeyJzIjoiRV9Sa3ZFamZpcWtrVUFuMjRUQlhNcUswUmx3IiwidiI6MSwicCI6I=
+ntcInVcIjozMDE0OTEyMSxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZm=
+dGFsZW50Lm5ldFxcXC8_dXRtX3NvdXJjZT1lbWFpbCZ1dG1fbWVkaXVtPXRhbGVudF9lbWFpbHM=
+mdXRtX2NhbXBhaWduPXRhbGVudC1yZXRyZWF0LTIwMjBcIixcImlkXCI6XCIwMzg5ODA0OWYzNj=
+A0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcImRjYzM3MzhhMTYzMzEzODQ1Y=
+jA3YmY3YjNjNjA5NDFhZjRmNWZkN2FcIl19In0" target=3D"_blank">Learn more</a></d=
+iv></td></tr></tbody></table><table align=3D"center" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" class=3D"m_-2675869003916603071container540" wid=
+th=3D"540"><tbody><tr><td height=3D"25"></td></tr><tr><td bgcolor=3D"E1E8F0=
+" height=3D"1"></td></tr><tr><td height=3D"20"></td></tr></tbody></table></=
+td></tr></tbody></table>
+                        </td>
+                      </tr>
+                     =20
+                    </tbody></table>
+
+                  </td>
+                </tr>
+              </tbody></table>
+
+            </td>
+          </tr>
+         =20
+        </tbody></table>
+
+      </td>
+    </tr>
+
+    <tr><td height=3D"40"></td></tr>
+   =20
+
+   =20
+    <tr>
+      <td width=3D"100%" align=3D"center" bgcolor=3D"ffffff" style=3D"backg=
+round-color:#ffffff">
+        <table border=3D"0" align=3D"center" width=3D"600" cellpadding=3D"0=
+" cellspacing=3D"0" class=3D"m_-2675869003916603071container600">
+          <tbody><tr>
+            <td align=3D"center">
+              <table border=3D"0" align=3D"center" cellpadding=3D"0" cellsp=
+acing=3D"0">
+                <tbody><tr>
+                  <td height=3D"30"></td>
+                </tr>
+                <tr>
+                  <td align=3D"center">
+                    <table border=3D"0" width=3D"320" align=3D"center" cell=
+padding=3D"0" cellspacing=3D"0" class=3D"m_-2675869003916603071footer">
+                      <tbody><tr>
+                        <td align=3D"center" style=3D"color:#b6b6b6;font-si=
+ze:12px;line-height:21px">
+                          Netsoft Holdings, LLC - 11650 Olio Rd. Suite #100=
+0 - 193 Fishers, IN 46037, United States
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align=3D"center">
+                          <table border=3D"0" width=3D"300" align=3D"center=
+" cellpadding=3D"0" cellspacing=3D"0" class=3D"m_-2675869003916603071footer=
+">
+                            <tbody><tr>
+                              <td height=3D"10"></td>
+                            </tr>
+                            <tr>
+                              <td align=3D"center" style=3D"color:#4d5359;f=
+ont-size:12px;line-height:21px">
+                                <a style=3D"color:#2aa7ff;border-style:none=
+!important;border:0!important;text-decoration:none!important" href=3D"http:=
+//track.hubstaff.com/track/click/30149121/blog.hubstaff.com?p=3DeyJzIjoidnF=
+MZGhWS0xGWGtwQmpsTGU0M3Zsa3E2YWRBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcIn=
+ZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvYmxvZy5odWJzdGFmZi5jb21cIixcImlkXCI6X=
+CIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcIjU2MGM5=
+NzIyMTI1MjUxMzAwMDJkYzg5N2ZjYmQyZGM5OTU4M2NmZTJcIl19In0" target=3D"_blank">=
+Our Blog</a> |
+                                <a style=3D"color:#2aa7ff;border-style:none=
+!important;border:0!important;text-decoration:none!important" href=3D"http:=
+//track.hubstaff.com/track/click/30149121/support.hubstaff.com?p=3DeyJzIjoi=
+MGF1bjlXZVJGeUZQSGZKb0dZd0RyT2FqWE1rIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSx=
+cInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvc3VwcG9ydC5odWJzdGFmZi5jb21cIixcIm=
+lkXCI6XCIwMzg5ODA0OWYzNjA0ZWU3YTY2N2RlODk0M2MxOWViMVwiLFwidXJsX2lkc1wiOltcI=
+mRjNjAxNzJhOWJkZGE1NTI4NWFlNTU2ZWY1OWIxNDZiYzE3NTFkNGJcIl19In0" target=3D"_=
+blank">Support</a>
+                              </td>
+                            </tr>
+                          </tbody></table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align=3D"center" style=3D"font-size:12px;line-h=
+eight:21px">
+                         =20
+                          <a style=3D"color:#2aa7ff;border-style:none!impor=
+tant;border:0!important;text-decoration:none!important" href=3D"http://trac=
+k.hubstaff.com/track/click/30149121/hubstafftalent.net?p=3DeyJzIjoiM085a1Q0=
+cGwwTElINEVYeE1NWUMwcVIzM3lBIiwidiI6MSwicCI6IntcInVcIjozMDE0OTEyMSxcInZcIjo=
+xLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL2h1YnN0YWZmdGFsZW50Lm5ldFxcXC9zZXR0aW5nc1=
+wiLFwiaWRcIjpcIjAzODk4MDQ5ZjM2MDRlZTdhNjY3ZGU4OTQzYzE5ZWIxXCIsXCJ1cmxfaWRzX=
+CI6W1wiMGNkNjM3NzM3YWY0ZmQ4MWVjYmQ4NDBhYmE4YjAxZGViMWI4YmY2OVwiXX0ifQ" targ=
+et=3D"_blank">Change notification settings</a>
+                        </td>
+                      </tr>
+                    </tbody></table>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"30"></td>
+                </tr>
+              </tbody></table>
+            </td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+   =20
+  </tbody></table>
+  <img src=3D"http://track.hubstaff.com/track/open.php?u=3D30149121&amp;id=
+=3D03898049f3604ee7a667de8943c19eb1" height=3D"1" width=3D"1" alt=3D""></di=
+v>
+
+
+
+
+</div></div></div>
+
+--00000000000062a52e061d47604c--

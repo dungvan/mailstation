@@ -1,0 +1,93 @@
+Return-Path: <dungvan2512@gmail.com>
+Delivered-To: telegram@mailstation.space
+Received: from mailstation.space ([127.0.0.1])
+	by mailstation.space with LMTP
+	id ps0jICmwemZ7pQgAB6Sr/Q
+	(envelope-from <dungvan2512@gmail.com>)
+	for <telegram@mailstation.space>; Tue, 25 Jun 2024 18:55:21 +0700
+X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on mailstation.space
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.3 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DMARC_PASS,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_NONE,
+	RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.6
+X-Spam-Report: 
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	*      https://www.dnswl.org/, no trust
+	*      [209.85.208.45 listed in list.dnswl.org]
+	* -0.1 SPF_PASS SPF check passed
+	* -0.1 DMARC_PASS DMARC check passed
+	*  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+	*  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+	*      provider
+	*      [dungvan2512[at]gmail.com]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*       valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	*      author's domain
+	* -0.0 RCVD_IN_MSPIKE_H2 RBL: Average reputation (+2)
+	*      [209.85.208.45 listed in wl.mailspike.net]
+X-Spam-Score: -0.3
+Authentication-Results: mailstation.space; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: mailstation.space; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: mailstation.space;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20230601 header.b=DBKk6KVA;
+	dkim-atps=neutral
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mailstation.space (Postfix) with ESMTPS id 53C557F9A0
+	for <directupdate@mailstation.space>; Tue, 25 Jun 2024 18:55:20 +0700 (+07)
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-57d046f4afdso2830166a12.1
+        for <directupdate@mailstation.space>; Tue, 25 Jun 2024 04:55:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1719316518; x=1719921318; darn=mailstation.space;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=/QPBPa4oJECBHSDPJAlLiERaDDeev8BTdo9RM0uvGF8=;
+        b=DBKk6KVA8kqcXtdL1FrI3ytN0rkYK43T8EQJCEC7CbdynB5UyLkiwvMULxfNTwN/4p
+         VETU5nrzj17kArjzfpdtkgdnVqnO2kwsHgpMsQESP6qYnZdl/1cuuh4FqXBJXx+7ZmL0
+         sO0s/M3/a1SmhNN/01NvRIOLf0+M3en4xbTi9CcrxlOlkOdVbIoGsGkzo41APapqQJB5
+         MY+rnIh7hlg/Wsv1RluaTzeHSrpuysN5Kl2Z8EZaWyaqfG1gNWsFERu9zYwv6hr2xhsq
+         GUS3wyt0O7ez8TKrVuQJradkYal/8gOosXzsY2Y0RyUxD9T7Rih9wndzc+z1xuNhF8l9
+         CAgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719316518; x=1719921318;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=/QPBPa4oJECBHSDPJAlLiERaDDeev8BTdo9RM0uvGF8=;
+        b=FHCauqPO+4uwUeWmEFiX+jUQTUuTqgo5cYXg4qTtWAkX9PdJH0x1Sa7zmavKh8Ib5d
+         ZkvBuell7XYbXg8Qk7kA+QRhBJ2fBp+cexhwkAJE/lHnBcU0m5cLzuROzY/UpIj5lxQ5
+         ZDGFYgybuCdytp7v7c3tn7E3V0i8ZDAgJtMpJA+C36lmYi+nbEOkcFYz0XAd8w0N1Tmy
+         MNzNnd3WK8OPhatyK2PZ/IjT7skmqIh8ePmm6Nc06HYfm7T/hF8bZTMKh76uXDzHg7Xl
+         Z3+fdZewf62Z33kahcdrVSNkoakav3f4t6wWvb/krwGX8DkW0MgxItysvcZnnrW3MjPl
+         afNg==
+X-Gm-Message-State: AOJu0YxDI/uNCyu9ppBaqEIRWk6t6GSc7XxWzsUJGd6E0aqYrUQy2sKJ
+	lo0ANtt/XOL7D1cmNeK+TUUtBVYB6kI2JicMD0cusEVov0ClDSljBS8n8O/c8BnpkCcJ0xd1pO4
+	fwhNNnrKg4EHwNGB3K+8VLo0o6p7WWw==
+X-Google-Smtp-Source: AGHT+IFkpT/RzvhTgyII3yGjbFwmThuSbJZlIKU0YQxc20m+zgEi4csye2W0M2Au1+0iCcx7zEZ+D7LCuQ3lclOlzuU=
+X-Received: by 2002:a50:cd99:0:b0:57d:496:209a with SMTP id
+ 4fb4d7f45d1cf-57d4bd5a085mr6519355a12.6.1719316517702; Tue, 25 Jun 2024
+ 04:55:17 -0700 (PDT)
+MIME-Version: 1.0
+From: Dung Van <dungvan2512@gmail.com>
+Date: Tue, 25 Jun 2024 18:54:40 +0700
+Message-ID: <CAK2WHZ1UC2KJrMGYJNV7+M-Fxc_EyTRW66tG3uAYv=W+Wv4pCA@mail.gmail.com>
+Subject: 5678
+To: directupdate@mailstation.space
+Content-Type: multipart/alternative; boundary="0000000000004b577e061bb592bd"
+
+--0000000000004b577e061bb592bd
+Content-Type: text/plain; charset="UTF-8"
+
+jghdlj
+
+--0000000000004b577e061bb592bd
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr">jghdlj</div>
+
+--0000000000004b577e061bb592bd--
